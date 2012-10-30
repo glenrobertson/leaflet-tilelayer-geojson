@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Leaflet GeoJSON tile layer example</title>
+
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4.3/leaflet.css" />
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4.3/leaflet.ie.css" />
+    <![endif]-->
+    <script src="http://cdn.leafletjs.com/leaflet-0.4.3/leaflet.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="TileLayer.GeoJSON.js"></script>
+
+    <style type="text/css">
+    html, body, map {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+    }
+    .geojson-dialog-hover {
+        background: #EEE;
+        border: 1px solid #DDD;
+        border-radius: 5px;
+        color: #333;
+        font-family: sans-serif;
+        font-size: small;
+        margin: 0;
+        padding: 3px;
+    }
+    .geojson-dialog-hover p {
+        margin: 0 0 5px 0;
+        padding: 0;
+    }
+    .geojson-feature-property-name {
+        font-weight: bold;
+        margin-right: 5px;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="map" style="width: 100%; height: 100%; border: 1px solid #ccc"></div>
+
+    <script type="text/javascript">
+    
+    var map = new L.Map('map'),
+        cloudmadeUrl = 'http://{s}.tile.cloudmade.com/1a1b06b230af4efdbb989ea99e9841af/997/256/{z}/{x}/{y}.png',
+        cloudmadeAttribution = 'Map data &copy; 2011 OpenStreetMap contributors, Imagery &copy; 2011 CloudMade';
+    
+    map.setView(new L.LatLng(38.617, -100.261), 5);
+
+    var baseLayer = new L.TileLayer(cloudmadeUrl, { attribution: cloudmadeAttribution});
+    map.addLayer(baseLayer);
+
+    var geojsonURL = 'http://polymaps.appspot.com/county/{z}/{x}/{y}.json';
+    var geojsonLayer = new L.TileLayer.GeoJSON(geojsonURL);
+
+    geojsonLayer.setGeoJSONOptions({
+        /* style of GeoJSON feature */
+        style: {
+            "color": "#1B1",
+            "fillColor": "#1B1",
+            "weight": 0.7,
+            "opacity": 0.3,
+            "fillOpacity": 0.1
+        },
+        /* style of GeoJSON feature when hovered */
+        hoverStyle: {
+            "fillOpacity": 0.4
+        },
+        hoverOffset: new L.Point(30,-16)
+    });
+
+    map.addLayer(geojsonLayer);
+
+    </script>
+</body>
+</html>
