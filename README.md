@@ -1,5 +1,5 @@
 # Leaflet GeoJSON Tile Layer
-A Leaflet Tile Layer that renders GeoJSON tiles as a single layer
+Renders GeoJSON tiles on an L.GeoJSON layer
 
 ## Example usage
 The following example shows a GeoJSON Tile Layer for tiles with duplicate features.
