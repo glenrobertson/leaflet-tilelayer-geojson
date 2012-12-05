@@ -45,10 +45,6 @@ L.TileLayer.Ajax = L.TileLayer.extend({
     }
 });
 
-// Load tiled GeoJSON and merge into single geojson hash.
-// Multiple features can be grouped by specifying a featureMergeKey function in the options
-// Geometries are unioned into a MultiPolygon, 
-// Assumes geometries are trimmed to the tile boundaries
 L.TileLayer.GeoJSON = L.TileLayer.Ajax.extend({
     _geojson: {"type":"FeatureCollection","features":[]},
     initialize: function (url, options, geojsonOptions) {
