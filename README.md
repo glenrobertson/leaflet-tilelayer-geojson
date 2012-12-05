@@ -1,7 +1,8 @@
 # Leaflet GeoJSON Tile Layer
 
 ## Example usage
-The following will set up a tile layer for an example local endpoint.
+The following example sets up a GeoJSON Tile Layer, where tiles have duplicate features
+Features are deduplicated by comparing the result of the `unique` function for each feature.
 
         var style = {
             "clickable": true,
@@ -42,3 +43,9 @@ The following will set up a tile layer for an example local endpoint.
             }
         );
         map.addLayer(geojsonTileLayer);
+
+
+## Future development
+Functionality currently being worked on:
+* Re-unioning feature geometries that have been trimmed to tile boundaries
+* Removing dependency on JQuery
