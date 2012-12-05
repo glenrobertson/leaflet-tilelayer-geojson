@@ -63,18 +63,6 @@ L.TileLayer.GeoJSON = L.TileLayer.Ajax.extend({
         this.off('load', this._tilesLoaded);
         L.TileLayer.Ajax.prototype.onRemove.call(this, map);
     },
-    groupByKey: function (items, keyCallback) {
-        var groups = {};
-        for (var i in items) {
-            var item = items[i];
-            var key = keyCallback(item);
-            if (!groups.hasOwnProperty(key)) {
-                groups[key] = [];
-            }
-            groups[key].push(item);
-        }
-        return groups;
-    },
     data: function () {
         this._geojson.features = [];
         if (this.options.unique) {
