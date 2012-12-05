@@ -1,7 +1,9 @@
 # Leaflet GeoJSON Tile Layer
+Renders GeoJSON tiles on an L.GeoJSON layer
 
 ## Example usage
-The following example sets up a GeoJSON Tile Layer, where tiles have duplicate features
+The following example shows a GeoJSON Tile Layer for tiles with duplicate features.
+
 Features are deduplicated by comparing the result of the `unique` function for each feature.
 
         var style = {
