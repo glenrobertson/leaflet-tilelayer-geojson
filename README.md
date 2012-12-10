@@ -1,10 +1,9 @@
 # Leaflet GeoJSON Tile Layer
-Renders GeoJSON tiles on an L.GeoJSON layer
+Renders GeoJSON tiles on a Leaflet GeoJSON layer
 
-## Example usage
-The following example shows a GeoJSON Tile Layer for tiles with duplicate features.
-
-Features are deduplicated by comparing the result of the `unique` function for each feature.
+## Example setup
+The following example will render tiles from a geojson tile endpoint.
+Each feature in the tile is trimmed to the tile boundary, so geometries are reassembled after all tiles are loaded.
 
         var style = {
             "clickable": true,
@@ -49,5 +48,4 @@ Features are deduplicated by comparing the result of the `unique` function for e
 
 ## Future development
 Functionality currently being worked on:
-* Re-unioning feature geometries that have been trimmed to tile boundaries
 * Removing dependency on JQuery
