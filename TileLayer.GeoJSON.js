@@ -66,7 +66,8 @@ L.TileLayer.Ajax = L.TileLayer.extend({
 });
 
 // Load tiled GeoJSON and merge into single geojson hash.
-// Multiple features can be grouped by specifying a featureMergeKey function in the options
+// Multiple features can be grouped by using the unique function. 
+// The unique function will be called for each feature, and features with the same string returned will be grouped
 // Geometry tile boundaries will be dissolved only if the boundary lines are equal but opposing direction for adjacent tiles
 L.TileLayer.GeoJSON = L.TileLayer.Ajax.extend({
     _geojson: {"type":"FeatureCollection","features":[]},
