@@ -54,6 +54,6 @@ Functionality currently being worked on:
 ## Contributors
 Thanks to the following people for helping so far:
 
-[Nelson Minar](https://github.com/NelsonMinar)
-[Alex Barth](https://github.com/lxbarth)
-[Pawel Paprota](https://github.com/ppawel)
+* [Nelson Minar](https://github.com/NelsonMinar)
+* [Alex Barth](https://github.com/lxbarth)
+* [Pawel Paprota](https://github.com/ppawel)
