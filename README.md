@@ -50,4 +50,10 @@ Features are deduplicated by comparing the result of the `unique` function for e
 ## Future development
 Functionality currently being worked on:
 * Re-unioning feature geometries that have been trimmed to tile boundaries
-* Removing dependency on JQuery
+
+## Contributors
+Thanks to the following people for helping so far:
+
+[Nelson Minar](https://github.com/NelsonMinar)
+[Alex Barth](https://github.com/lxbarth)
+[Pawel Paprota](https://github.com/ppawel)
