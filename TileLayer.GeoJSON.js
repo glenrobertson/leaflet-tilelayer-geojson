@@ -34,6 +34,7 @@ L.TileLayer.Ajax = L.TileLayer.extend({
     },
     // Load the requested tile via AJAX
     _loadTile: function (tile, tilePoint) {
+        this._adjustTilePoint(tilePoint);
         var layer = this;
         var req = new XMLHttpRequest();
         this._requests.push(req);
