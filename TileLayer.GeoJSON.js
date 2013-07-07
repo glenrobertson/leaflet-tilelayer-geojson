@@ -90,7 +90,7 @@ L.TileLayer.GeoJSON = L.TileLayer.Ajax.extend({
                     for (var f in tileDatum.features) {
                         var featureKey = this.options.unique(tileDatum.features[f]);
                         if (this._uniqueKeys.hasOwnProperty(featureKey)) {
-                            delete tileDatum.features[f];
+                            tileDatum.features.splice(f, 1);
                         }
                         else {
                             this._uniqueKeys[featureKey] = featureKey;
