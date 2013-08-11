@@ -4,7 +4,7 @@ Renders GeoJSON tiles on an L.GeoJSON layer.
 ## Docs
 
 ### Usage example
-The following example shows how to render a GeoJSON Tile Layer for US county GeoJSON tiles.
+The following example shows how to render a GeoJSON Tile Layer for US state GeoJSON tiles. [See demo](http://bl.ocks.org/glenrobertson/6203331).
 
         var style = {
             "clickable": true,
@@ -50,7 +50,7 @@ The following example shows how to render a GeoJSON Tile Layer for US county Geo
         map.addLayer(geojsonTileLayer);
 
 ### Constructor
-L.TileLayer( <String> urlTemplate, <GeoJSONTileLayer options> options?, <GeoJSON options> geojsonOptions? )
+    L.TileLayer( <String> urlTemplate, <GeoJSONTileLayer options> options?, <GeoJSON options> geojsonOptions? )
 
 ### URL Template
 A string of the following form, that returns valid GeoJSON.
@@ -58,11 +58,11 @@ A string of the following form, that returns valid GeoJSON.
     'http://{s}.somedomain.com/blabla/{z}/{x}/{y}.json'
 
 ### GeoJSONTileLayer options
-* clipTiles (boolean) (default = false): If `true`, clips tile feature geometries to their tile boundaries using SVG clipping.
-* unique (function): If set, the feature's are grouped into GeometryCollection GeoJSON objects. Each group is defined by the key returned by this function, with the feature object as the first argument.
+* `clipTiles (boolean) (default = false)`: If `true`, clips tile feature geometries to their tile boundaries using SVG clipping.
+* `unique (function)`: If set, the feature's are grouped into GeometryCollection GeoJSON objects. Each group is defined by the key returned by this function, with the feature object as the first argument.
 
 ### GeoJSON options
-Options that will be passed to the resulting L.GeoJSON layer: (http://leafletjs.com/reference.html#geojson-options)[http://leafletjs.com/reference.html#geojson-options]
+Options that will be passed to the resulting L.GeoJSON layer: [http://leafletjs.com/reference.html#geojson-options](http://leafletjs.com/reference.html#geojson-options)
 
 
 ## Contributors
