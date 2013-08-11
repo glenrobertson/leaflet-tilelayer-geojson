@@ -1,25 +1,25 @@
 // Load data tiles from an AJAX data source
 L.TileLayer.Ajax = L.TileLayer.extend({
     _requests: [],
-    _addTile: function(tilePoint, container) {
+    _addTile: function (tilePoint) {
         var tile = { datum: null, processed: false };
         this._tiles[tilePoint.x + ':' + tilePoint.y] = tile;
         this._loadTile(tile, tilePoint);
     },
     // XMLHttpRequest handler; closure over the XHR object, the layer, and the tile
     _xhrHandler: function (req, layer, tile, tilePoint) {
-        return function() {
-            if (req.readyState != 4) {
+        return function () {
+            if (req.readyState !== 4) {
                 return;
             }
             var s = req.status;
-            if ((s >= 200 && s < 300) || s == 304) {
+            if ((s >= 200 && s < 300) || s === 304) {
                 tile.datum = JSON.parse(req.responseText);
                 layer._tileLoaded(tile, tilePoint);
             } else {
                 layer._tileLoaded(tile, tilePoint);
             }
-        }
+        };
     },
     // Load the requested tile via AJAX
     _loadTile: function (tile, tilePoint) {
@@ -31,16 +31,16 @@ L.TileLayer.Ajax = L.TileLayer.extend({
         req.open('GET', this.getTileUrl(tilePoint), true);
         req.send();
     },
-    _reset: function() {
+    _reset: function () {
         L.TileLayer.prototype._reset.apply(this, arguments);
         for (var i in this._requests) {
             this._requests[i].abort();
         }
         this._requests = [];
     },
-    _update: function() {
+    _update: function () {
         if (this._map._panTransition && this._map._panTransition._inProgress) { return; }
-        if (this._tilesToLoad < 0) this._tilesToLoad = 0;
+        if (this._tilesToLoad < 0) { this._tilesToLoad = 0; }
         L.TileLayer.prototype._update.apply(this, arguments);
     }
 });
@@ -77,7 +77,8 @@ L.TileLayer.GeoJSON = L.TileLayer.Ajax.extend({
     _removeOldClipPaths: function  () {
         for (var clipPathId in this._clipPathRectangles) {
             var clipPathZXY = clipPathId.split('_').slice(1);
-            if (parseInt(clipPathZXY[0]) !== this._map.getZoom()) {
+            var zoom = parseInt(clipPathZXY[0], 10);
+            if (zoom !== this._map.getZoom()) {
                 var rectangle = this._clipPathRectangles[clipPathId];
                 this._map.removeLayer(rectangle);
                 var clipPath = document.getElementById(clipPathId);
@@ -130,7 +131,7 @@ L.TileLayer.GeoJSON = L.TileLayer.Ajax.extend({
             nw = this._map.unproject(nwPoint),
             se = this._map.unproject(sePoint);
             this._clipPathRectangles[clipPathId] = new L.Rectangle(new L.LatLngBounds([nw, se]), {
-                opacity: 0, 
+                opacity: 0,
                 fillOpacity: 0,
                 clickable: false,
                 noClip: true
@@ -150,7 +151,6 @@ L.TileLayer.GeoJSON = L.TileLayer.Ajax.extend({
         this._recurseLayerUntilPath(function (pathLayer) {
             pathLayer._container.setAttribute('clip-path', 'url(#' + clipPathId + ')');
         }, layer);
-        
     },
 
     // Add a geojson object from a tile to the GeoJSON layer
@@ -224,7 +224,11 @@ L.TileLayer.GeoJSON = L.TileLayer.Ajax.extend({
             incomingLayer.feature = L.GeoJSON.asFeature(geojson);
         }
         incomingLayer.defaultOptions = incomingLayer.options;
-        this.geojsonLayer.resetStyle(incomingLayer);
+
+        // Only apply styling to GeometryCollection layers (not sub-layers)
+        if (parentLayer === this.geojsonLayer) {
+            this.geojsonLayer.resetStyle(incomingLayer);    
+        }
 
         if (options.onEachFeature) {
             options.onEachFeature(geojson, incomingLayer);
