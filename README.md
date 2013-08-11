@@ -1,10 +1,10 @@
 # Leaflet GeoJSON Tile Layer
-Renders GeoJSON tiles on an L.GeoJSON layer
+Renders GeoJSON tiles on an L.GeoJSON layer.
 
-## Example usage
-The following example shows a GeoJSON Tile Layer for tiles with duplicate features.
+## Docs
 
-Features are deduplicated by comparing the result of the `unique` function for each feature.
+### Usage example
+The following example shows how to render a GeoJSON Tile Layer for US state GeoJSON tiles. [See demo](http://bl.ocks.org/glenrobertson/6203331).
 
         var style = {
             "clickable": true,
@@ -18,9 +18,12 @@ Features are deduplicated by comparing the result of the `unique` function for e
             "fillOpacity": 0.5
         };
 
-        var geojsonURL = 'http://localhost:8000/states/{z}/{x}/{y}.json';
+        var geojsonURL = 'http://polymaps.appspot.com/state/{z}/{x}/{y}.json';
         var geojsonTileLayer = new L.TileLayer.GeoJSON(geojsonURL, {
-                unique: function (feature) { return feature.id; }
+                clipTiles: true,
+                unique: function (feature) {
+                    return feature.id; 
+                }
             }, {
                 style: style,
                 onEachFeature: function (feature, layer) {
@@ -46,14 +49,26 @@ Features are deduplicated by comparing the result of the `unique` function for e
         );
         map.addLayer(geojsonTileLayer);
 
+### Constructor
+    L.TileLayer( <String> urlTemplate, <GeoJSONTileLayer options> options?, <GeoJSON options> geojsonOptions? )
 
-## Future development
-Functionality currently being worked on:
-* Re-unioning feature geometries that have been trimmed to tile boundaries
+### URL Template
+A string of the following form, that returns valid GeoJSON.
+
+    'http://{s}.somedomain.com/blabla/{z}/{x}/{y}.json'
+
+### GeoJSONTileLayer options
+* `clipTiles (boolean) (default = false)`: If `true`, clips tile feature geometries to their tile boundaries using SVG clipping.
+* `unique (function)`: If set, the feature's are grouped into GeometryCollection GeoJSON objects. Each group is defined by the key returned by this function, with the feature object as the first argument.
+
+### GeoJSON options
+Options that will be passed to the resulting L.GeoJSON layer: [http://leafletjs.com/reference.html#geojson-options](http://leafletjs.com/reference.html#geojson-options)
+
 
 ## Contributors
-Thanks to the following people for helping so far:
+Thanks to the following people who contributed:
 
 * [Nelson Minar](https://github.com/NelsonMinar)
 * [Alex Barth](https://github.com/lxbarth)
 * [Pawel Paprota](https://github.com/ppawel)
+* [Mick Thompson](https://github.com/dthompson)
