@@ -227,7 +227,7 @@ L.TileLayer.GeoJSON = L.TileLayer.Ajax.extend({
 
         // Only apply styling to GeometryCollection layers (not sub-layers)
         if (parentLayer === this.geojsonLayer) {
-            this.geojsonLayer.resetStyle(incomingLayer);    
+            this.geojsonLayer.resetStyle(incomingLayer);
         }
 
         if (options.onEachFeature) {
