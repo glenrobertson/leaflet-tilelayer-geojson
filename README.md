@@ -62,7 +62,7 @@ A string of the following form, that returns valid GeoJSON.
 * `unique (function)`: If set, the feature's are grouped into GeometryCollection GeoJSON objects. Each group is defined by the key returned by this function, with the feature object as the first argument.
 
 ### GeoJSON options
-Options that will be passed to the resulting L.GeoJSON layer: (http://leafletjs.com/reference.html#geojson-options)[http://leafletjs.com/reference.html#geojson-options]
+Options that will be passed to the resulting L.GeoJSON layer: [http://leafletjs.com/reference.html#geojson-options](http://leafletjs.com/reference.html#geojson-options)
 
 
 ## Contributors
