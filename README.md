@@ -50,7 +50,7 @@ The following example shows how to render a GeoJSON Tile Layer for US state GeoJ
         map.addLayer(geojsonTileLayer);
 
 ### Constructor
-    L.TileLayer( <String> urlTemplate, <GeoJSONTileLayer options> options?, <GeoJSON options> geojsonOptions? )
+    L.TileLayer.GeoJSON( <String> urlTemplate, <GeoJSONTileLayer options> options?, <GeoJSON options> geojsonOptions? )
 
 ### URL Template
 A string of the following form, that returns valid GeoJSON.
