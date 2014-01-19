@@ -200,6 +200,7 @@ L.TileLayer.GeoJSON = L.TileLayer.Ajax.extend({
                 return this;
             }
 
+            incomingLayer.feature = L.GeoJSON.asFeature(geojson);
             // Add the incoming Layer to existing key's GeometryCollection
             if (key in this._keyLayers) {
                 parentLayer = this._keyLayers[key];
@@ -207,7 +208,6 @@ L.TileLayer.GeoJSON = L.TileLayer.Ajax.extend({
             }
             // Convert the incoming GeoJSON feature into a new GeometryCollection layer
             else {
-                incomingLayer.feature = L.GeoJSON.asFeature(geojson);
                 this._keyLayers[key] = incomingLayer;
             }
         }
