@@ -33,9 +33,7 @@ L.TileLayer.Ajax = L.TileLayer.extend({
     },
     _reset: function () {
         L.TileLayer.prototype._reset.apply(this, arguments);
-        var i = 0;
-        var len;
-        for (i, len=this._requests.length; i < len; i++) {
+        for (var i in this._requests) {
             this._requests[i].abort();
         }
         this._requests = [];
@@ -77,11 +75,9 @@ L.TileLayer.GeoJSON = L.TileLayer.Ajax.extend({
 
     // Remove clip path elements from other earlier zoom levels
     _removeOldClipPaths: function  () {
-        var clipPathId = 0;
-        var len2, clipPathZXY, zoom;
-        for (clipPathId, len2=this._clipPathRectangles.length; clipPathId < len2; clipPathId++) {
-            clipPathZXY = clipPathId.split('_').slice(1);
-            zoom = parseInt(clipPathZXY[0], 10);
+        for (var clipPathId in this._clipPathRectangles) {
+            var clipPathZXY = clipPathId.split('_').slice(1);
+            var zoom = parseInt(clipPathZXY[0], 10);
             if (zoom !== this._map.getZoom()) {
                 var rectangle = this._clipPathRectangles[clipPathId];
                 this._map.removeLayer(rectangle);
