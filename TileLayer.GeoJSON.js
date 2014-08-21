@@ -33,7 +33,9 @@ L.TileLayer.Ajax = L.TileLayer.extend({
     },
     _reset: function () {
         L.TileLayer.prototype._reset.apply(this, arguments);
-        for (var i in this._requests) {
+        var i = 0;
+        var len;
+        for (i, len=this._requests.length; i < len; i++) {
             this._requests[i].abort();
         }
         this._requests = [];
@@ -75,9 +77,11 @@ L.TileLayer.GeoJSON = L.TileLayer.Ajax.extend({
 
     // Remove clip path elements from other earlier zoom levels
     _removeOldClipPaths: function  () {
-        for (var clipPathId in this._clipPathRectangles) {
-            var clipPathZXY = clipPathId.split('_').slice(1);
-            var zoom = parseInt(clipPathZXY[0], 10);
+        var clipPathId = 0;
+        var len2, clipPathZXY, zoom;
+        for (clipPathId, len2=this._clipPathRectangles.length; clipPathId < len2; clipPathId++) {
+            clipPathZXY = clipPathId.split('_').slice(1);
+            zoom = parseInt(clipPathZXY[0], 10);
             if (zoom !== this._map.getZoom()) {
                 var rectangle = this._clipPathRectangles[clipPathId];
                 this._map.removeLayer(rectangle);
@@ -105,14 +109,11 @@ L.TileLayer.GeoJSON = L.TileLayer.Ajax.extend({
         // Only perform SVG clipping if the browser is using SVG
         if (!L.Path.SVG) { return; }
 
-        var svg;
-
         if (!this._map._pathRoot) {
-            svg = this._map._pathRoot = L.Path.prototype._createElement('svg');
+            this._map._pathRoot = L.Path.prototype._createElement('svg');
             this._map._panes.overlayPane.appendChild(this._map._pathRoot);
-        } else {
-            svg = this._map._pathRoot;
         }
+        var svg = this._map._pathRoot;
 
         // create the defs container if it doesn't exist
         var defs = null;
