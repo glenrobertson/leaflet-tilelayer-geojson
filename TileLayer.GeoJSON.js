@@ -39,7 +39,7 @@ L.TileLayer.Ajax = L.TileLayer.extend({
         this._requests = [];
     },
     _update: function () {
-        if (this._map._panTransition && this._map._panTransition._inProgress) { return; }
+        if (this._map && this._map._panTransition && this._map._panTransition._inProgress) { return; }
         if (this._tilesToLoad < 0) { this._tilesToLoad = 0; }
         L.TileLayer.prototype._update.apply(this, arguments);
     }
