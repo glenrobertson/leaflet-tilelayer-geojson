@@ -104,6 +104,7 @@ L.TileLayer.GeoJSON = L.TileLayer.Ajax.extend({
     _clipLayerToTileBoundary: function (layer, tilePoint) {
         // Only perform SVG clipping if the browser is using SVG
         if (!L.Path.SVG) { return; }
+        if (!this._map) { return; }
 
         if (!this._map._pathRoot) {
             this._map._pathRoot = L.Path.prototype._createElement('svg');
