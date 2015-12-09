@@ -33,7 +33,7 @@ L.TileLayer.Ajax = L.TileLayer.extend({
     },
     _reset: function () {
         L.TileLayer.prototype._reset.apply(this, arguments);
-        for (var i in this._requests) {
+        for (var i = 0; i < this._requests.length; i++) {
             this._requests[i].abort();
         }
         this._requests = [];
