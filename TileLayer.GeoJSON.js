@@ -13,7 +13,7 @@ L.TileLayer.Ajax = L.TileLayer.extend({
                 return;
             }
             var s = req.status;
-            if ((s >= 200 && s < 300) || s === 304) {
+            if ((s >= 200 && s < 300 && s != 204) || s === 304) {
                 tile.datum = JSON.parse(req.responseText);
                 layer._tileLoaded(tile, tilePoint);
             } else {
