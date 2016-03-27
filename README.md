@@ -66,9 +66,4 @@ Options that will be passed to the resulting L.GeoJSON layer: [http://leafletjs.
 
 
 ## Contributors
-Thanks to the following people who contributed:
-
-* [Nelson Minar](https://github.com/NelsonMinar)
-* [Alex Barth](https://github.com/lxbarth)
-* [Pawel Paprota](https://github.com/ppawel)
-* [Mick Thompson](https://github.com/dthompson)
+Thanks to the following people who contributed: https://github.com/glenrobertson/leaflet-tilelayer-geojson/graphs/contributors
