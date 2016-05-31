@@ -74,14 +74,14 @@ L.TileLayer.GeoJSON = L.TileLayer.Ajax.extend({
     },
 
     _getUniqueId: function() {
-        return this._leaflet_id || ''; // jshint ignore:line
+        return String(this._leaflet_id || ''); // jshint ignore:line
     },
 
     // Remove clip path elements from other earlier zoom levels
     _removeOldClipPaths: function  () {
         for (var clipPathId in this._clipPathRectangles) {
             var prefix = clipPathId.split('tileClipPath')[0];
-            if (String(this._getUniqueId()) === String(prefix)) {
+            if (this._getUniqueId() === prefix) {
                 var clipPathZXY = clipPathId.split('_').slice(1);
                 var zoom = parseInt(clipPathZXY[0], 10);
                 if (zoom !== this._map.getZoom()) {
