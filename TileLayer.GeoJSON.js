@@ -73,19 +73,26 @@ L.TileLayer.GeoJSON = L.TileLayer.Ajax.extend({
         L.TileLayer.Ajax.prototype._reset.apply(this, arguments);
     },
 
+    _getUniqueId: function() {
+        return this._leaflet_id || ''; // jshint ignore:line
+    },
+
     // Remove clip path elements from other earlier zoom levels
     _removeOldClipPaths: function  () {
         for (var clipPathId in this._clipPathRectangles) {
-            var clipPathZXY = clipPathId.split('_').slice(1);
-            var zoom = parseInt(clipPathZXY[0], 10);
-            if (zoom !== this._map.getZoom()) {
-                var rectangle = this._clipPathRectangles[clipPathId];
-                this._map.removeLayer(rectangle);
-                var clipPath = document.getElementById(clipPathId);
-                if (clipPath !== null) {
-                    clipPath.parentNode.removeChild(clipPath);
+            var prefix = clipPathId.split('tileClipPath')[0];
+            if (String(this._getUniqueId()) === String(prefix)) {
+                var clipPathZXY = clipPathId.split('_').slice(1);
+                var zoom = parseInt(clipPathZXY[0], 10);
+                if (zoom !== this._map.getZoom()) {
+                    var rectangle = this._clipPathRectangles[clipPathId];
+                    this._map.removeLayer(rectangle);
+                    var clipPath = document.getElementById(clipPathId);
+                    if (clipPath !== null) {
+                        clipPath.parentNode.removeChild(clipPath);
+                    }
+                    delete this._clipPathRectangles[clipPathId];
                 }
-                delete this._clipPathRectangles[clipPathId];
             }
         }
     },
@@ -123,7 +130,7 @@ L.TileLayer.GeoJSON = L.TileLayer.Ajax.extend({
         }
 
         // Create the clipPath for the tile if it doesn't exist
-        var clipPathId = 'tileClipPath_' + tilePoint.z + '_' + tilePoint.x + '_' + tilePoint.y;
+        var clipPathId = this._getUniqueId() + 'tileClipPath_' + tilePoint.z + '_' + tilePoint.x + '_' + tilePoint.y;
         var clipPath = document.getElementById(clipPathId);
         if (clipPath === null) {
             clipPath = document.createElementNS(L.Path.SVG_NS, 'clipPath');
