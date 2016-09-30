@@ -161,7 +161,7 @@ L.TileLayer.GeoJSON = L.TileLayer.Ajax.extend({
 
         // Add the clip-path attribute to reference the id of the tile clipPath
         this._recurseLayerUntilPath(function (pathLayer) {
-            pathLayer._container.setAttribute('clip-path', 'url(#' + clipPathId + ')');
+            pathLayer._container.setAttribute('clip-path', 'url(' + window.location.href + '#' + clipPathId + ')');          
         }, layer);
     },
 
