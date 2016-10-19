@@ -1,4 +1,6 @@
 # Leaflet GeoJSON Tile Layer
+[![CDNJS](https://img.shields.io/cdnjs/v/leaflet-tilelayer-geojson.svg)](https://cdnjs.com/libraries/leaflet-tilelayer-geojson)
+
 Renders GeoJSON tiles on an L.GeoJSON layer.
 
 ## Docs
